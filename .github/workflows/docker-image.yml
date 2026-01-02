@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: Build and publish image to Docker Hub
 
 on:
   push:
@@ -8,11 +8,11 @@ on:
 
 jobs:
 
-  build:
+  build_and_publish:
 
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v4
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+      run: docker build . --file Dockerfile --tag py_web_app:latest
