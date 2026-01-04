@@ -2,7 +2,7 @@ replicaCount: 1
 
 image:
   repository: ghcr.io/yonimachlin137/basic-devops-assignment
-  tag: "11"
+  tag: "13"
   pullPolicy: IfNotPresent
 
 service:
