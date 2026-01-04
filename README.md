@@ -138,7 +138,6 @@ kubectl port-forward svc/kube-prometheus-stack-prometheus 9090:9090 -n monitorin
 | ArgoCD | http://localhost:8080 | user: `admin`, password: see below |
 | Grafana | http://localhost:3000 | user: `admin`, password: `admin` |
 | Python App | http://localhost:5000 | - |
-| Prometheus | http://localhost:9090 | - |
 
 ### Get ArgoCD Password
 
@@ -155,7 +154,6 @@ kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.pas
 | Endpoint | Description |
 |----------|-------------|
 | `/` | Hello World |
-| `/about` | About page |
 | `/info` | App info (JSON) |
 | `/health` | Health check |
 | `/ready` | Readiness check |
@@ -183,7 +181,6 @@ echo "Generating traffic to Python app..."
 for i in {1..100}; do
   # Mix of different endpoints
   curl -s http://localhost:5000/ > /dev/null
-  curl -s http://localhost:5000/about > /dev/null
   curl -s http://localhost:5000/info > /dev/null
   curl -s http://localhost:5000/slow > /dev/null
   curl -s http://localhost:5000/random > /dev/null
@@ -232,3 +229,12 @@ The GitHub Actions workflow automatically:
 3. **Updates** `helm-charts/python-app/values.yaml` with new image tag
 4. **ArgoCD** detects the change and syncs automatically
 
+---
+
+## 🧹 Cleanup
+
+Remove all resources:
+
+```bash
+kind delete cluster --name devops-demo
+```
