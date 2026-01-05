@@ -4,7 +4,6 @@ loki-stack:
       enabled: false
     resources:
       limits:
-        cpu: 300m
         memory: 256Mi
       requests:
         cpu: 100m
@@ -17,7 +16,6 @@ loki-stack:
         - url: http://loki:3100/loki/api/v1/push
     resources:
       limits:
-        cpu: 100m
         memory: 128Mi
       requests:
         cpu: 50m

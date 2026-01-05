@@ -22,9 +22,9 @@ kube-prometheus-stack:
     prometheusSpec:
       serviceMonitorSelectorNilUsesHelmValues: false
       podMonitorSelectorNilUsesHelmValues: false
+      ruleSelectorNilUsesHelmValues: false
       resources:
         limits:
-          cpu: 500m
           memory: 512Mi
         requests:
           cpu: 100m
@@ -37,7 +37,6 @@ kube-prometheus-stack:
       type: ClusterIP
     resources:
       limits:
-        cpu: 200m
         memory: 256Mi
       requests:
         cpu: 100m

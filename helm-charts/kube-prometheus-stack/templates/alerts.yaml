@@ -1,0 +1,46 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: flask-app-alerts
+  labels:
+    release: kube-prometheus-stack
+spec:
+  groups:
+    - name: flask-app
+      rules:
+        - alert: HighErrorRate
+          expr: sum(rate(flask_http_request_duration_seconds_count{status=~"5.."}[5m])) / sum(rate(flask_http_request_duration_seconds_count[5m])) > 0.1
+          for: 1m
+          labels:
+            severity: warning
+          annotations:
+            summary: High error rate detected
+            description: Error rate is above 10% for the last 5 minutes
+
+        - alert: HighLatency
+          expr: histogram_quantile(0.95, rate(flask_http_request_duration_seconds_bucket[5m])) > 0.5
+          for: 2m
+          labels:
+            severity: warning
+          annotations:
+            summary: High latency detected
+            description: 95th percentile latency is above 500ms
+
+        - alert: AppDown
+          expr: up{job="python-app-python-app"} == 0
+          for: 1m
+          labels:
+            severity: critical
+          annotations:
+            summary: Application is down
+            description: Python app has been down for more than 1 minute
+
+        - alert: HighRequestRate
+          expr: sum(rate(app_requests_total[1m])) > 100
+          for: 2m
+          labels:
+            severity: info
+          annotations:
+            summary: High request rate
+            description: Request rate is above 100 requests per second
+

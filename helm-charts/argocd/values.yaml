@@ -2,10 +2,21 @@ argo-cd:
   server:
     service:
       type: ClusterIP
-
   configs:
     params:
       server.insecure: true
 
 gitRepo: https://github.com/yonimachlin137/basic-devops-assignment.git
 targetRevision: main
+
+applications:
+  - name: python-app
+    path: helm-charts/python-app
+    namespace: default
+  - name: kube-prometheus-stack
+    path: helm-charts/kube-prometheus-stack
+    namespace: monitoring
+    serverSideApply: true
+  - name: loki
+    path: helm-charts/loki
+    namespace: monitoring
