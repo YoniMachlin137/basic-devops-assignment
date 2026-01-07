@@ -76,7 +76,7 @@ chmod +x setup.sh
 
 ---
 
-## 📦 Manual Installation Steps
+## 📦 Manual Installation Steps (Only needed if automated setup didn't work)
 
 If you prefer step-by-step installation:
 
@@ -126,9 +126,6 @@ kubectl port-forward svc/kube-prometheus-stack-grafana 3000:80 -n monitoring &
 
 # Python App (http://localhost:5000)
 kubectl port-forward svc/python-app-python-app 5000:80 &
-
-# Prometheus (http://localhost:9090)
-kubectl port-forward svc/kube-prometheus-stack-prometheus 9090:9090 -n monitoring &
 ```
 
 ### Access URLs
